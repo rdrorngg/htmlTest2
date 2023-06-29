@@ -257,7 +257,7 @@
                                 } else if (AnswerCode == 3){ //메뉴 추천
                                     botMessage.className = "chat-message";
                                     botBubble.className = "bot-message";
-                                    botBubble.textContent = res_list['Answer']
+                                    botBubble.innerHTML = res_list['Answer']
                                     botMessage.appendChild(botBubble);
                                     chatLog.appendChild(botMessage);
                                     //json 출력
