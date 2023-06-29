@@ -50,7 +50,6 @@
 
     <script>
         var isCartOpen = false;
-
         function handleButtonClick(buttonName) {
             if (buttonName === '예약 관리') {
                 loadReservation();
@@ -165,8 +164,9 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var chatLog = document.querySelector(".chat-log");
-                    chatLog.innerHTML = xhr.responseText;
-                    isCartOpen = true; // 장바구니 페이지 열림 플래그 설정
+                    // chatLog.innerHTML = xhr.responseText;
+                    $(chatLog).html(xhr.responseText)
+                    isCartOpen = true; // 장바구니 페이지 열림 플래그 설정'
                 }
             };
             xhr.open("GET", "cart.html", true);
@@ -209,80 +209,108 @@
                                 console.log(AnswerCode)
                                 var botMessage = document.createElement("div");
                                 var botBubble = document.createElement("div");
+                                var forCart = {
+                                    "Menu":res_list['Menu'],
+                                    "Num":res_list["Num"],
+                                    "Total_price":res_list["Total_price"]
+                                };
+                                localStorage.setItem("forCart", JSON.stringify(forCart));
+                                
                                 if (AnswerCode == null){ //답변 코드 없을 시
+                                    var Answer = res_list['Answer']
+                                    console.log(Answer)
                                     botMessage.className = "chat-message";
                                     botBubble.className = "bot-message";
-                                    botBubble.textContent = res_list['Answer']
+                                    botBubble.textContent = Answer
                                     botMessage.appendChild(botBubble);
                                     chatLog.appendChild(botMessage);
                                 }
                                 else if (AnswerCode == 1) { //예약
+                                    var Answer = res_list['Answer']
+                                    console.log(Answer)
                                     botMessage.className = "chat-message";
                                     botBubble.className = "bot-message";
-                                    botBubble.textContent = res_list['Answer']
+                                    botBubble.textContent = Answer
                                     botMessage.appendChild(botBubble);
                                     chatLog.appendChild(botMessage);
 
                                 } else if (AnswerCode == 11){ //불완전한 예약
+                                    var Answer = res_list['Answer']
+                                    console.log(Answer)
                                     botMessage.className = "chat-message";
                                     botBubble.className = "bot-message";
-                                    botBubble.textContent = res_list['Answer']
+                                    botBubble.textContent = Answer
                                     botMessage.appendChild(botBubble);
                                     chatLog.appendChild(botMessage);
-                                    
+
 
                                 } else if (AnswerCode == 2){ //최종 주문
+                                    var Answer = res_list['Answer']
+                                    console.log(Answer)
                                     botMessage.className = "chat-message";
                                     botBubble.className = "bot-message";
-                                    botBubble.textContent = res_list['Answer']
+                                    botBubble.innerHTML = Answer
                                     botMessage.appendChild(botBubble);
                                     chatLog.appendChild(botMessage);
-                                    loadCart();
+                                    window.localStorage.clear()
+                                    // loadCart();
 
                                 } else if (AnswerCode == 21){ //주문 관련
+                                    var Answer = res_list['Answer']
+                                    console.log(Answer)
                                     botMessage.className = "chat-message";
                                     botBubble.className = "bot-message";
-                                    botBubble.textContent = res_list['Answer']
+                                    botBubble.textContent = Answer
                                     botMessage.appendChild(botBubble);
                                     chatLog.appendChild(botMessage);
 
                                 } else if (AnswerCode == 22){ //주문 관련
+                                    var Answer = res_list['Answer']
+                                    console.log(Answer)
                                     botMessage.className = "chat-message";
                                     botBubble.className = "bot-message";
-                                    botBubble.textContent = res_list['Answer']
+                                    botBubble.textContent = Answer
                                     botMessage.appendChild(botBubble);
                                     chatLog.appendChild(botMessage);
 
 
                                 } else if (AnswerCode == 3){ //메뉴 추천
+                                    var Answer = res_list['Answer']
+                                    console.log(Answer)
                                     botMessage.className = "chat-message";
                                     botBubble.className = "bot-message";
-                                    botBubble.innerHTML = res_list['Answer']
+                                    botBubble.innerHTML = Answer
                                     botMessage.appendChild(botBubble);
                                     chatLog.appendChild(botMessage);
                                     //json 출력
 
 
                                 } else if (AnswerCode == 31){ //전체 메뉴판
+                                    var Answer = res_list['Answer']
+                                    console.log(Answer)
                                     botMessage.className = "chat-message";
                                     botBubble.className = "bot-message";
-                                    botBubble.textContent = res_list['Answer']
+                                    botBubble.textContent = Answer
                                     botMessage.appendChild(botBubble);
                                     chatLog.appendChild(botMessage);
                                     //json 출력
 
                                 } else if (AnswerCode == 4){ //메뉴 및 매장 안내
+                                    var Answer = res_list['Answer']
+                                    console.log(Answer)
                                     botMessage.className = "chat-message";
                                     botBubble.className = "bot-message";
-                                    botBubble.textContent = res_list['Answer']
+                                    botBubble.textContent = Answer
                                     botMessage.appendChild(botBubble);
                                     chatLog.appendChild(botMessage);
                                     //json 출력
 
                                 } else if (AnswerCode == 5){ //이벤트 정보
+                                    var Answer = res_list['Answer']
+                                    console.log(Answer)
                                     botMessage.className = "chat-message";
                                     botBubble.className = "bot-message";
-                                    botBubble.textContent = res_list['Answer']
+                                    botBubble.textContent = Answer
                                     botMessage.appendChild(botBubble);
                                     chatLog.appendChild(botMessage);
                                     loadPromotion();
